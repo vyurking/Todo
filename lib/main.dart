@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:todo_with_bloc/page/tasks.dart';
+import 'package:todo_with_bloc/page/tabs.dart';
+import 'package:todo_with_bloc/page/pending_tasks.dart';
 import 'package:todo_with_bloc/service/app_router.dart';
 import 'package:todo_with_bloc/service/app_theme.dart';
 
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             theme: state.switchValue
                 ? AppThemes.appThemeData[AppTheme.darkTheme]
                 : AppThemes.appThemeData[AppTheme.lightTheme],
-            home: const TaskPage(),
+            home: TabPage(),
             onGenerateRoute: appRouter.onGenerateRoute,
           );
         },

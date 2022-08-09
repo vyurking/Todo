@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_with_bloc/page/recycle_bin.dart';
-import 'package:todo_with_bloc/page/tasks.dart';
+import 'package:todo_with_bloc/page/pending_tasks.dart';
 
 import '../blocs/bloc_exports.dart';
 
@@ -25,11 +25,11 @@ class MyDrawer extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(
-                  onTap: () =>
-                      Navigator.of(context).pushReplacementNamed(TaskPage.id),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(PendingTaskPage.id),
                   leading: const Icon(Icons.folder_special_outlined),
                   title: const Text('Мои задачи'),
-                  trailing: Text('${state.allTasks.length}'),
+                  trailing: Text('${state.pendingTasks.length}'),
                 );
               },
             ),

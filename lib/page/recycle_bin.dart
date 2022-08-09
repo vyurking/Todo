@@ -7,7 +7,7 @@ import 'my_drawer.dart';
 class RecycleBinPage extends StatelessWidget {
   const RecycleBinPage({Key? key}) : super(key: key);
 
-  static const id = '/recycle_bin_screen';
+  static const id = 'recycle_bin_screen';
 
   @override
   Widget build(BuildContext context) {
