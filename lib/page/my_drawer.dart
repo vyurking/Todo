@@ -25,7 +25,8 @@ class MyDrawer extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(
-                  onTap: () => Navigator.of(context).pushNamed(TaskPage.id),
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(TaskPage.id),
                   leading: const Icon(Icons.folder_special_outlined),
                   title: const Text('Мои задачи'),
                   trailing: Text('${state.allTasks.length}'),
@@ -36,14 +37,26 @@ class MyDrawer extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(RecycleBinPage.id),
+                  onTap: () => Navigator.of(context)
+                      .pushReplacementNamed(RecycleBinPage.id),
                   leading: const Icon(Icons.folder_delete_outlined),
                   title: const Text('Корзина'),
                   trailing: Text('${state.removedTasks.length}'),
                 );
               },
             ),
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return Switch(
+                  value: state.switchValue,
+                  onChanged: (newValue) {
+                    newValue
+                        ? context.read<SwitchBloc>().add(SwithcOnEvent())
+                        : context.read<SwitchBloc>().add(SwithcOffEvent());
+                  },
+                );
+              },
+            )
           ],
         ),
       ),
