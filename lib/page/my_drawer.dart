@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_with_bloc/page/recycle_bin.dart';
 import 'package:todo_with_bloc/page/pending_tasks.dart';
+import 'package:todo_with_bloc/page/tabs.dart';
 
 import '../blocs/bloc_exports.dart';
 
@@ -25,8 +26,8 @@ class MyDrawer extends StatelessWidget {
             BlocBuilder<TaskBloc, TaskState>(
               builder: (context, state) {
                 return ListTile(
-                  onTap: () => Navigator.of(context)
-                      .pushReplacementNamed(PendingTaskPage.id),
+                  onTap: () =>
+                      Navigator.of(context).pushReplacementNamed(TabPage.id),
                   leading: const Icon(Icons.folder_special_outlined),
                   title: const Text('Мои задачи'),
                   trailing: Text('${state.pendingTasks.length}'),
@@ -51,8 +52,12 @@ class MyDrawer extends StatelessWidget {
                   value: state.switchValue,
                   onChanged: (newValue) {
                     newValue
-                        ? context.read<SwitchBloc>().add(SwithcOnEvent())
-                        : context.read<SwitchBloc>().add(SwithcOffEvent());
+                        ? context
+                            .read<SwitchBloc>()
+                            .add(SwithcSetValueEvent(switchValue: true))
+                        : context
+                            .read<SwitchBloc>()
+                            .add(SwithcSetValueEvent(switchValue: false));
                   },
                 );
               },

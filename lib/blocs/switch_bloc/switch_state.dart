@@ -18,9 +18,8 @@ class SwitchState extends Equatable {
       switchValue: map['switchValue'] as bool,
     );
   }
-
 }
 
 class SwitchInitial extends SwitchState {
-  const SwitchInitial({required super.switchValue});
+  SwitchInitial({required super.switchValue});
 }

@@ -5,21 +5,23 @@ import '../blocs/bloc_exports.dart';
 import '../models/task.dart';
 import '../service/guid_get.dart';
 
-class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({
+class EditTaskScreen extends StatelessWidget {
+  final Task oldTask;
+  const EditTaskScreen({
+    required this.oldTask,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController title = TextEditingController();
-    TextEditingController description = TextEditingController();
+    TextEditingController title = TextEditingController(text: oldTask.title);
+    TextEditingController description = TextEditingController(text: oldTask.description);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const Text(
-            'Добавь задачу',
+            'Редактировать задачу',
             style: TextStyle(
               fontSize: 24,
             ),
@@ -56,16 +58,18 @@ class AddTaskScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  var task = Task(
+                  var editedTask = Task(
                     title: title.text,
                     description: description.text,
-                    id: GUIDGen.generate(),
+                    id: oldTask.id,
+                    isDone: false,
+                    isFavorite: oldTask.isFavorite,
                     date: DateFormat('dd-MM-yyyy hh:mm').format(DateTime.now()),
                   );
-                  context.read<TaskBloc>().add(AddTask(task: task));
+                  context.read<TaskBloc>().add(EditTask(oldTask: oldTask, newTask: editedTask));
                   Navigator.pop(context);
                 },
-                child: const Text('Добавить'),
+                child: const Text('Сохранить'),
               ),
             ],
           )

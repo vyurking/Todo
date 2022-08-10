@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'switch_bloc.dart';
 
 abstract class SwitchEvent extends Equatable {
@@ -7,6 +8,15 @@ abstract class SwitchEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SwithcOnEvent extends SwitchEvent {}
-class SwithcOffEvent extends SwitchEvent {}
+class SwithcSetValueEvent extends SwitchEvent {
+  final bool switchValue;
+  
+  SwithcSetValueEvent({
+    required this.switchValue,
+  });
+
+  @override
+  List<Object> get props => [switchValue];
+  
+}
 
